@@ -1,0 +1,15 @@
+{
+  "name": "sandyhoof-poller",
+  "version": "1.0.0",
+  "description": "Telemetry poller for Sandy Hoof",
+  "type": "module",
+  "main": "services/trackerPollerService.js",
+  "scripts": {
+    "start": "node services/trackerPollerService.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^16.3.1"
+  }
+}
