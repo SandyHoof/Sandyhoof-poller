@@ -224,7 +224,7 @@ export async function fetchTrackerLiveData(clientAPI, clientV2, serial) {
 
     const status = {
       serial,
-      deviceId,
+      deviceID: deviceId,
       battery: statusData.batteryPct ?? null,
       temperature: statusData.temperature ?? null,
       motion: statusData.motion ?? null,

@@ -39,14 +39,22 @@ async function pollLoop() {
       const data = await fetchTrackerLiveData(clientAPI, clientV2, serial);
       if (!data) continue;
 
-      await insertStatusIfChanged(data);
+      const { gps, ...statusOnly } = data;
+      await insertStatusIfChanged(statusOnly);
 
       if (data.gps) {
         await insertTelemetry({
-          serial,
-          deviceID: data.deviceId,
-          ...data.gps
+          serial: Number(serial),          // Supabase expects BIGINT
+          deviceID: String(data.deviceID), // Supabase expects TEXT
+          timestamp: data.gps.timestamp,
+          latitude: data.gps.lat,
+          longitude: data.gps.lon,
+          altitude: data.gps.altitude ?? null,
+          speed: data.gps.speed ?? null,
+          heading: data.gps.heading ?? null,
+          accuracy: data.gps.accuracy ?? null
         });
+
       }
     }
 
