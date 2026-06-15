@@ -61,9 +61,10 @@ async function pollLoop() {
   } catch (err) {
     console.error("❌ Poll loop error:", err.message);
   }
-
-  setTimeout(pollLoop, 60000); // run every 15 seconds
 }
 
-// 5. Start the loop
-pollLoop();
+// Manual trigger only
+pollLoop().then(() => {
+  console.log("Poll loop finished (manual run).");
+  process.exit(0);
+});
